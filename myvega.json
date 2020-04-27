@@ -1,0 +1,29 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "My interactive chart",
+  "width": 860,
+  "height":500,
+  "data": {"url": "https://raw.githubusercontent.com/Maplub/AirQualityData/master/PM10_2018_daily.csv"},
+ "transform": [{
+    "filter": {"field": "pm10", "range": [0, 180]}
+  }],
+  "selection": {
+    "pts": {
+      "type": "single"
+    }
+  },
+  "mark": "line",
+  "encoding": {
+    "x": {"timeUnit":"yearmonthday","field": "time", "type": "temporal"},
+    "y": {"field": "pm10","type": "quantitative"},
+    "color": {
+      "condition": {
+        "selection": "pts",
+        "field": "id 2", "type": "nominal"
+      },
+      "value": "grey"
+    },
+    "tooltip": [{"field": "id 2", "type": "nominal"},
+                {"field": "pm10", "type": "quantitative"}]
+  }
+}
